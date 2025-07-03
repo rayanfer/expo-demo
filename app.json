@@ -11,6 +11,9 @@
       "expo-router"
     ],
     "name": "expo-demo",
-    "slug": "expo-demo"
+    "slug": "expo-demo",
+    "android": {
+      "package": "com.anonymous.expodemo"
+    }
   }
 }
