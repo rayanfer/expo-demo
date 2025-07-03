@@ -1,15 +1,29 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Calendar } from "react-native-calendars";
 
-export default function Calendar() {
+export default function CalendarVIew() {
   return (
     <View style={styles.container}>
       <View style={styles.calendarBox}>
-        <Text style={styles.calendarText}>[Dummy Calendar UI]</Text>
+        <Calendar
+          markedDates={{
+            "2025-07-16": {
+              selected: true,
+              marked: true,
+              selectedColor: "blue",
+            },
+            "2025-07-17": { marked: true },
+            "2025-07-18": { marked: true, dotColor: "red", activeOpacity: 0 },
+            "2025-07-19": { disabled: true, disableTouchEvent: true },
+          }}
+        />
       </View>
       <Text style={styles.info}>Upcoming Appointments:</Text>
       <View style={styles.appointmentCard}>
-        <Text style={styles.appointmentTitle}>Dr. Smith - 10:00 AM, July 5</Text>
+        <Text style={styles.appointmentTitle}>
+          Dr. Smith - 10:00 AM, July 5
+        </Text>
         <Text style={styles.appointmentDetails}>General Checkup</Text>
       </View>
       <View style={styles.appointmentCard}>
@@ -33,13 +47,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   calendarBox: {
-    backgroundColor: "#fff",
     borderRadius: 8,
-    padding: 32,
-    alignItems: "center",
-    marginBottom: 24,
-    elevation: 2,
+    padding: 4,
+    backgroundColor: "#fff",
     shadowColor: "#000",
+    elevation: 2,
+    marginBottom: 16,
     shadowOpacity: 0.08,
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },

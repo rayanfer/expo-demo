@@ -27,14 +27,14 @@ export default function Tab() {
   }, []);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <div style={styles.container} className="overflow-auto bg-blue-100">
       <FlatList
         data={messages}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <MessageCard key={item.id} message={item} />}
         ListHeaderComponent={<View style={{ height: 16 }}></View>} // top padding
       />
-    </ScrollView>
+    </div>
   );
 }
 

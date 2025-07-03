@@ -1,6 +1,13 @@
 import { api } from "@/helpers/api";
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  FlatListComponent,
+} from "react-native";
 
 function TaskCard({
   task,
@@ -20,25 +27,27 @@ function TaskCard({
 export default function Tasks() {
   const [tasks, setTasks] = React.useState([]);
   useEffect(() => {
-    api
-      .loadTodos()
-      .then((data) => {
-        setTasks(data);
-        console.log(data);
-      });
+    api.loadTodos().then((data) => {
+      setTasks(data);
+      // console.log(data);
+    });
   }, []);
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {tasks.map((task) => (
-        <TaskCard key={task.id} task={task} />
-      ))}
-    </ScrollView>
+    <View style={styles.container}>
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <TaskCard key={item.id} task={item} />}
+        ListHeaderComponent={<View style={{ height: 16 }}></View>} // top padding
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
     alignItems: "stretch",
   },
   header: {

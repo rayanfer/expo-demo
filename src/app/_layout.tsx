@@ -1,7 +1,7 @@
 import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable } from "react-native-gesture-handler";
 
@@ -16,6 +16,11 @@ export const unstable_settings = {
   anchor: "index",
 };
 
+const userInfo = {
+  name: "John Doe",
+  email: "johndoe@gmail.com",
+};
+
 function CustomDrawerContent(props: any) {
   return (
     <DrawerContentScrollView
@@ -28,18 +33,11 @@ function CustomDrawerContent(props: any) {
           style={{ width: 80, height: 80, borderRadius: 40, marginBottom: 12 }}
         />
         <Text style={{ fontWeight: "bold", fontSize: 18, marginBottom: 4 }}>
-          John Doe
+          {userInfo.name}
         </Text>
-        <Text style={{ color: "#888", marginBottom: 8 }}>
-          john.doe@email.com
-        </Text>
-        <Pressable
-          style={pressableStyles}
-          onPress={() => {
-            // Add imitate relation logic here
-          }}
-        >
-          <Text style={{ color: "#fff", fontWeight: "bold" }}>
+        <Text style={{ color: "#888", marginBottom: 8 }}>{userInfo.email}</Text>
+        <Pressable style={pressableStyles}>
+          <Text className="bg-blue-500 p-3 rounded-xl text-white font-bold">
             Imitate Relation
           </Text>
         </Pressable>
@@ -48,7 +46,6 @@ function CustomDrawerContent(props: any) {
         <Pressable
           style={pressableStyles}
           onPress={() => {
-            // Navigate to Settings
             props.navigation.navigate("(tabs)", { screen: "settings" });
           }}
         >
@@ -60,13 +57,7 @@ function CustomDrawerContent(props: any) {
           />
           <Text style={{ color: "#1976d2", fontWeight: "bold" }}>Settings</Text>
         </Pressable>
-        <Pressable
-          style={pressableStyles}
-          onPress={() => {
-            // Navigate to Relationships
-            // Replace with actual navigation if available
-          }}
-        >
+        <Pressable style={pressableStyles}>
           <Ionicons
             name="people-outline"
             size={20}
@@ -77,13 +68,7 @@ function CustomDrawerContent(props: any) {
             Relationships
           </Text>
         </Pressable>
-        <Pressable
-          style={pressableStyles}
-          onPress={() => {
-            // Navigate to Help
-            // Replace with actual navigation if available
-          }}
-        >
+        <Pressable style={pressableStyles}>
           <Ionicons
             name="help-circle-outline"
             size={20}
@@ -96,19 +81,14 @@ function CustomDrawerContent(props: any) {
       {/* <DrawerItemList {...props} /> */}
       <View style={{ flex: 1 }} />
       <View style={{ padding: 16 }}>
-        <Pressable
-          style={logoutPressableStyles}
-          onPress={() => {
-            // Add logout logic here
-          }}
-        >
+        <Pressable style={logoutPressableStyles}>
           <Ionicons
             name="log-out-outline"
             size={20}
             color="#d32f2f"
             style={{ marginRight: 12 }}
           />
-          <Text style={{ color: "#d32f2f", fontWeight: "bold" }}>Logout</Text>
+          <Text className="text-red-500 font-bold">Logout</Text>
         </Pressable>
       </View>
     </DrawerContentScrollView>
