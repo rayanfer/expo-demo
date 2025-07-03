@@ -1,9 +1,24 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Tabs } from "expo-router";
+import { Tabs, usePathname } from "expo-router";
 import "../../global.css";
 import { Ionicons } from "@/components/icons";
+import useAppState from "@/lib/store";
+import { useEffect } from "react";
 
 export default function TabLayout() {
+  const pathname = usePathname();
+  const setActiveTab = useAppState((s) => s.setActiveTab);
+
+  useEffect(() => {
+    // Extract tab name from pathname, e.g. "/(tabs)/tasks" -> "tasks"
+    const match = pathname.match(/\/\(tabs\)\/([^\/]+)/);
+    if (match && match[1]) {
+      setActiveTab(match[1]);
+    } else if (pathname === "/(tabs)") {
+      setActiveTab("home");
+    }
+  }, [pathname, setActiveTab]);
+
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "blue", headerShown: false }}>
       <Tabs.Screen
